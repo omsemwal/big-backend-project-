@@ -6,20 +6,23 @@
 //require('dotenv').config(); // Make sure to load environment variables
 
 //import express from "express";
+//import route from './routes/user.routes.js'
+// rest of your code
+//const app = express();
+
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-//import route from './routes/user.routes.js'
-// rest of your code
-import app from "./app.js";
-//const app = express();
+
+import { app } from "./app.js";
+
 app.use(bodyParser.json());
 dotenv.config({
-  path: "./.env",
+  path: "./.env.sample",
 });
-
+ 
 const uri =
-  "mongodb+srv://16039233:16039233@hariom-semwal.ylnslae.mongodb.net/";
+  "mongodb+srv://16039233:16039233@hariom-semwal.ylnslae.mongodb.net/backend-code ";
 
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
