@@ -10,8 +10,8 @@ const ACCESS_TOKEN_SECRET="chai-aur-code"
 const verifyJwt = asyncHandler(async (req, res, next) => {
 try {
   
-      const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")  // req.cookies?.accessToken  is not working 
-               console.log(token, " successfully");
+      const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")   
+              // console.log(token, " successfully");
   
       if (!token) {
         throw new ApiError(401, "unauthorized request !");
@@ -23,7 +23,7 @@ try {
       if (!decodetoken ) {
         throw new ApiError(401, " decodetoken not match !");
       }
-      const user = await User.findById(decodetoken?._id).select(
+      const user = await User.findById(decodetoken?._id).select( 
         "-passsword -refreshToken"
       );
   

@@ -80,10 +80,10 @@ userSchema.methods.isPasswordCorrect = async function(password){
 }
 userSchema.methods.generateAccessToken = function () {
     try {
-        console.log("ID:", this._id);
-        console.log("Email:", this.email);
-        console.log("Username:", this.username);
-        console.log("Fullname:", this.fullname);
+        // console.log("ID:", this._id);
+        // console.log("Email:", this.email);
+        // console.log("Username:", this.username);
+        // console.log("Fullname:", this.fullname);
 
         // Replace 'your-secret-key' with your actual secret key
        const  ACCESS_TOKEN_SECRET="chai-aur-code";

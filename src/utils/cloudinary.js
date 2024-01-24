@@ -3,12 +3,16 @@
 
 
 
+ cloudinary.config({ 
+  cloud_name: "dy6s4gqcp",
+  api_key: 578296856675496, 
+  api_secret: "EB8qgNw9HdwHVgQYueIB5Dn6Ags"
+});
 
-cloudinary.config({ 
-   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-   api_key: process.env.CLOUDINARY_API_KEY , 
-   api_secret:process.env.CLOUDINARY_API_SECRET
- });
+
+//  CLOUDINARY_CLOUD_NAME= dy6s4gqcp
+// CLOUDINARY_API_KEY =578296856675496
+// CLOUDINARY_API_SECRET=EB8qgNw9HdwHVgQYueIB5Dn6Ags
 
 
  const uploadOnCloudinary=async(localFilePath)=>{
@@ -32,7 +36,19 @@ cloudinary.config({
       }
  }
 
-   export {uploadOnCloudinary}
+ const deleteOnCloudinary = async(public_id, resource_type)=>{
+  if(!public_id) return null
+  try {
+      return await cloudinary.uploader.destroy(public_id, {
+          resource_type,
+      })
+  } catch (error) {
+      console.log(error)
+      return null
+  }
+}
+
+   export {uploadOnCloudinary,deleteOnCloudinary }
 
 
 
