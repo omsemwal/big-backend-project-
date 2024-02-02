@@ -20,7 +20,7 @@ const router = Router();
 router.route("/register").post(
   upload.fields([
     {
-      name: "avtar",
+      name: "avatar",
       maxCount: 1,
     },
     {
@@ -32,16 +32,16 @@ router.route("/register").post(
 );
 router.route("/login").post(loginUser);
 // secured routes
-router.route("/logOut").post(verifyJwt, logoutuser);
+router.route("/logOut").post(verifyJwt, logoutuser); 
 router.route("/refresh-token").post(RefreshToken);
 router.route("/change-CurrentPasssword").post(verifyJwt, changeCurrentPasssword);
 router.route("/get-CurrentUser").get(verifyJwt, getCurrentUser);
-router.route("/update-Userdeatils ").patch(verifyJwt, updateUserdeatils);
-router.route("/update-UserAvtar ").patch(verifyJwt,upload.single("avtar"), updateUserAvtar);
+router.route("/updatedeatils ").patch(verifyJwt, updateUserdeatils);
+router.route("/avatar").patch(verifyJwt,upload.single("avatar"), updateUserAvtar);
 router.route("/updateUsercoverImage  ").patch(verifyJwt,upload.single("coverImage"),updateUsercoverImage );
 router.route("/c/:username").get(verifyJwt, getUserChannelProfile)
 router.route("/history").get(verifyJwt, getwatchHistory )
-
+ 
 export default router;
 
 // import { Router } from "express";

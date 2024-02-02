@@ -4,7 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
  
 
-const ACCESS_TOKEN_SECRET="chai-aur-code"
+
 
 
 const verifyJwt = asyncHandler(async (req, res, next) => {
@@ -17,7 +17,9 @@ try {
         throw new ApiError(401, "unauthorized request !");
       }
   
-      const decodetoken = jwt.verify(token, ACCESS_TOKEN_SECRET);
+      const decodetoken = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+
+      console.log(token,process.env.ACCESS_TOKEN_SECRET)
    
 
       if (!decodetoken ) {

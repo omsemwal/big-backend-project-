@@ -18,7 +18,7 @@ import { app } from "./app.js";
 
 app.use(bodyParser.json());
 dotenv.config({
-  path: "./.env.sample",
+  path: './env',
 });
  
 const uri =

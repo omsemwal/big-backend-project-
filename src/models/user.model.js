@@ -33,14 +33,13 @@ const userSchema= new Schema({
         trim:true,
         
     },
-    fullname:{
+    fullName:{
         type:String,
         require:true,
-       
         trim:true,
-        index:true
+       // index:true
     },
-    avtar:{
+    avatar:{ 
         type:String,
         require:true,
        
@@ -86,7 +85,7 @@ userSchema.methods.generateAccessToken = function () {
         // console.log("Fullname:", this.fullname);
 
         // Replace 'your-secret-key' with your actual secret key
-       const  ACCESS_TOKEN_SECRET="chai-aur-code";
+      // const  ACCESS_TOKEN_SECRET="chai-aur-code";
         
 
         return jwt.sign(
@@ -96,9 +95,9 @@ userSchema.methods.generateAccessToken = function () {
                 username: this.username,
                 fullname: this.fullname
             },
-            ACCESS_TOKEN_SECRET,
+            process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn: "1d" // You can specify the expiration directly
+                expiresIn: process.env.ACCESS_TOKEN_EXPIRY // You can specify the expiration directly
             }  
         ); 
     } catch (error) {
@@ -111,15 +110,15 @@ userSchema.methods.generateAccessToken = function () {
 userSchema.methods.generateRefreshToken = function () {
     try {
         // Replace 'your-refresh-token-secret-key' with your actual refresh token secret key
-       const REFRESH_TOKEN_SECRET="another-secret-key";
+      // const REFRESH_TOKEN_SECRET="another-secret-key";
        
         return jwt.sign(
             {
                 _id: this._id,
             },
-            REFRESH_TOKEN_SECRET,
+            process.env.REFRESH_TOKEN_SECRET,
             {
-                expiresIn: "7d" // You can specify the expiration directly
+                expiresIn: process.env.ACCESS_TOKEN_EXPIRY // You can specify the expiration directly
             }
         );
     } catch (error) {
