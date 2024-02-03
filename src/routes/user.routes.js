@@ -36,9 +36,9 @@ router.route("/logOut").post(verifyJwt, logoutuser);
 router.route("/refresh-token").post(RefreshToken);
 router.route("/change-CurrentPasssword").post(verifyJwt, changeCurrentPasssword);
 router.route("/get-CurrentUser").get(verifyJwt, getCurrentUser);
-router.route("/updatedeatils ").patch(verifyJwt, updateUserdeatils);
+router.route("/updatedeatils").patch(verifyJwt, updateUserdeatils);
 router.route("/avatar").patch(verifyJwt,upload.single("avatar"), updateUserAvtar);
-router.route("/updateUsercoverImage  ").patch(verifyJwt,upload.single("coverImage"),updateUsercoverImage );
+router.route("/coverImage").patch(verifyJwt,upload.single("coverImage"),updateUsercoverImage );
 router.route("/c/:username").get(verifyJwt, getUserChannelProfile)
 router.route("/history").get(verifyJwt, getwatchHistory )
  

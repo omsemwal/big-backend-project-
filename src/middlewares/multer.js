@@ -14,7 +14,7 @@ export const upload = multer({
     storage, 
    // any: true
 })
-// import multer from "multer";
+
 
 // // Multer configuration
 // const storage = multer.diskStorage({

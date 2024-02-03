@@ -416,11 +416,12 @@ const updateUserAvtar = asyncHandler(async (req, res) => {
   }
 });
 
-
+ 
 
 const updateUsercoverImage = asyncHandler(async (req, res) => {
   try {
     const coverImageLocalPath = req.file?.path;
+    console.log("kya bat"," ",coverImageLocalPath)
 
     if (!coverImageLocalPath) {
       throw new ApiError(400, "CoverImage file is missing");
@@ -430,14 +431,21 @@ const updateUsercoverImage = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user?._id).select(
       "-password -refreshToken"
     );
+    console.log(user)
 
-    const previousCoverImage = user.coverImage;
-    if (previousCoverImage && previousCoverImage.public_id) {
-      await deleteOnCloudinary(previousCoverImage.public_id);
+    // const previousCoverImage = user.coverImage;
+    // if (previousCoverImage && previousCoverImage.public_id) {
+    //   await deleteOnCloudinary(previousCoverImage.public_id);
+    // }
+    const previousCoverImage= await deleteOnCloudinary(user.coverImage);
+    if (previousCoverImage === null) {
+      // Handle deletion failure, throw an error or log a message
+      console.error("Failed to delete previous previousCoverImage from Cloudinary");
     }
+  
 
     // Upload the new cover image to Cloudinary
-    const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+    const coverImage = await uploadOnCloudinary(coverImageLocalPath );
 
     if (!coverImage) {
       throw new ApiError(400, "Error while uploading coverImage");
@@ -446,9 +454,8 @@ const updateUsercoverImage = asyncHandler(async (req, res) => {
     // Update the user with the new cover image URL
     const updatedUser = await User.findByIdAndUpdate(
       req.user?._id,
-      {
-        $set: { coverImage: coverImage.url },
-      },
+       { coverImage: coverImage.url },
+      
       { new: true }
     ).select("-password");
 
